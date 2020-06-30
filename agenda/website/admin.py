@@ -72,7 +72,7 @@ class PartenaireAdmin(Action):
     list_display_links = ['nom']
     ordering = ['nom']
     list_per_page = 10
-    fieldsets = [('Info du site', {'fields': ['nom',]}),
+    fieldsets = [('Info du site', {'fields': ['nom', 'image']}),
                  ('Standard', {'fields': ['status']})
                  ]
 
