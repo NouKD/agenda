@@ -4,7 +4,7 @@ from django.db import models
 
 class Presentation(models.Model):
     image = models.ImageField(upload_to='image/Presentation')
-    titre = models.CharField(max_length=250)
+    nom = models.CharField(max_length=250)
     description = models.TextField()
 
     date_add = models.DateTimeField(auto_now_add=True)
@@ -16,38 +16,45 @@ class Presentation(models.Model):
         verbose_name_plural = 'Presentations'
 
     def __str__(self):
-        return str(self.titre)
+        return str(self.nom)
 
-class ActuEvent(object):
+class SocialAccount(models.Model):
+    ICONS = [
+        ("facebook", "fa-facebook-f"),
+        ("instagram", "fa-instagram"),
+        ("twitter", "fa fa-twitter"),
+        ("linkedin", "fa-linkedin-in"),
+        ("pinterest", "fa fa-pinterest"),
 
-    prix = models.FloatField()
-    image = models.ImageField(upload_to='image/ActuEvent')
-    titre = models.CharField(max_length=250)
-    description = models.TextField()        
+    ]
+    
+    nom = models.CharField(max_length=255)
+    lien = models.URLField()
+    icon = models.CharField(choices=ICONS, max_length=20)
 
     date_add = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
 
     class Meta():
-        verbose_name = 'ActuEvent'
-        verbose_name_plural = 'ActuEvents'
+        verbose_name = 'Social account'
+        verbose_name_plural = 'Socials account'
 
     def __str__(self):
-        return str(self.titre)
+        return self.nom
 
 class Programme(models.Model):
     nom = models.CharField(max_length=255)
     image = models.ImageField(upload_to='image/Programme')
-    date = models.DateTimeField()
+    date = models.DateField()
 
     date_add = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
 
     class Meta():
-        verbose_name = 'ActuEvent'
-        verbose_name_plural = 'ActuEvents'
+        verbose_name = 'Programme'
+        verbose_name_plural = 'Programmes'
 
     def __str__(self):
         return str(self.nom)
@@ -61,11 +68,22 @@ class NewsLetter(models.Model):
     status = models.BooleanField(default=True)
 
     class Meta():
-        verbose_name = 'ActuEvent'
-        verbose_name_plural = 'ActuEvents'
+        verbose_name = 'NewsLetter'
+        verbose_name_plural = 'NewsLetters'
 
     def __str__(self):
         return str(self.nom)
 
 class Partenaire(models.Model):
+    nom = models.CharField(max_length=255)
     image = models.ImageField(upload_to='image/Partenaire')        
+
+    date_add = models.DateTimeField(auto_now_add=True)
+    date_update = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
+
+    class Meta():
+        verbose_name = 'Partenaire'
+        verbose_name_plural = 'Partenaires'
+
+        
